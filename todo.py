@@ -3,19 +3,41 @@ def print_todos(todos):
     if len(todos) == 0:
         print("You have nothing to do.")
     else:
-        i = 0
+        # i = 0
+        completed_list = []
+        incomplete_list = []
         for todo in todos:
-            print(f"{i}: {todo}")
-            i += 1
+            if todo['completed'] == False:
+                incomplete_list.append(todo['title'])
+            # print(f"{i}: {todo}")
+            # i += 1
+            if todo['completed'] == True:
+                completed_list.append(todo['title'])
+        print('======Pending======\n')
+        count = 0
+        for item in incomplete_list:
+            print(f'{count}. {item}\n')
+            count += 1
+        print('======Complete======\n')
+        count = 0
+        for item in completed_list:
+            print(f'{count}. {item}\n')
+            count += 1
 
 def add_todo(todos, item):
-    todos.append(item)
+    sub_dict = {
+        'title': item,
+        'completed' : False
+    }
+    todos.append(sub_dict)
+    # print(todos)
 
 def delete_todo(todos, index):
-    try:
-        del todos[index]
-    except IndexError:
-        print("That todo does not exist.")
+    # try:
+    #     del todos[index]
+    # except IndexError:
+    #     print("That todo does not exist.")
+    todos[index]['completed'] = True
 
 def print_menu():
     message = """
